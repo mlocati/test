@@ -9,6 +9,6 @@ jobs:
     runs-on: windows-2022
     steps:
       -
-        name: Find vswhere.exe
+        name: Find VC
         shell: cmd
-        run: where.exe vswhere.exe
+        run: vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
