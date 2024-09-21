@@ -9,18 +9,6 @@ jobs:
     runs-on: windows-2022
     steps:
       -
-        name: List variables
-        shell: cmd
-        run: set
-      -
         name: Find vswhere.exe
         shell: cmd
-        run: |
-          cd /D "C:\Program Files"
-          dir /S /B vswhere.exe
-      -
-        name: Find dumpbin.exe
-        shell: cmd
-        run: |
-          cd /D "C:\Program Files"
-          dir /S /B dumpbin.exe
+        run: where.exe vswhere.exe
