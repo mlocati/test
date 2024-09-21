@@ -1,0 +1,20 @@
+on:
+  workflow_dispatch:
+
+
+name: Test
+
+jobs:
+  test:
+    runs-on: windows-2022
+    steps:
+      -
+        name: List variables
+        shell: cmd
+        run: set
+      -
+        name: Find dumpbin.exe
+        shell: cmd
+        run: |
+          cd /D C:\
+          dir /S /B dumpbin.exe
