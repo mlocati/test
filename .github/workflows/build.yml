@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+    inputs:
+      sign:
+        description: Sign binaries
+        type: choice
+        options:
+          - 'no'
+          - test
+          - production
+        default: test
+
+jobs:
+  exe:
+    name: Build executables ${{ matrix.link }} ${{ matrix.bits}} bits
+    runs-on: windows-2022
+    strategy:
+      matrix:
+        bits:
+          - 32
+        link:
+          - shared
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Set variables
+        id: vars
+        shell: pwsh
+        run: ./build-exe/vars.ps1 -Bits ${{ matrix.bits }} -Link ${{ matrix.link }} -Sign '${{ github.event.inputs.sign }}'
